@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Dominio.Animal>
+@if (Context.Session.GetString("TipoEmp") == "Peon")
+{
+    <div>
+        <p>
+            <i style="color:red" class="fa-solid fa-circle-xmark">No tienes el Rol necesario</i>
+        </p>
+    </div>
+}
+else if (Context.Session.GetString("TipoEmp") == null)
+{
+    <p>
+        <i style="color:red" class="fa-solid fa-circle-xmark">Debe iniciar sesion</i>
+    </p>
+}
+else
+{
+    <h2>Ver animales por peso y tipo</h2>
+    <form asp-action="MostrarListado">
+        <div class="form-group">
+            <label class="control-label">Peso</label>
+            <input type="text" name="peso" class="form-control" />
+
+        </div>
+        <div class="form-group">
+            <label for="tipo">Tipo:</label>
+            <select id="tipo" name="tipo" required>
+                <option value="1">Bovino</option>
+                <option value="2">Ovino</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Guardar" class="btn btn-primary" />
+        </div>
+    </form>
+}

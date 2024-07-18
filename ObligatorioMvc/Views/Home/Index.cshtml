@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+<h1>@ViewData["Title"]</h1>
+
+
+<div class="text-center">
+    <h1 class="display-4">¡Bienvenido!</h1>
+    <br />
+    <br />
+
+    @{
+        if (Context.Session.GetString("EmailAct") == null)
+        {
+            <h2>Usted no ha iniciado sesión</h2>
+        }
+        else
+        {
+            <h2>Estas logueado como: <b><i>@ViewBag.msg</i></b></h2>
+        }
+    }
+
+</div>

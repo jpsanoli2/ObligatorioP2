@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Dominio.Tarea>
+
+    @if (Context.Session.GetString("TipoEmp") == "Capataz")
+{
+    <div>
+        <p>
+            <i style="color:red" class="fa-solid fa-circle-xmark">No tienes el Rol necesario</i>
+        </p>
+    </div>
+}
+else if (Context.Session.GetString("TipoEmp") == null)
+{
+    <p>
+        <i style="color:red" class="fa-solid fa-circle-xmark">Debe iniciar sesion</i>
+    </p>
+}
+else{
+<h2>Listado tareas</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Descripción</th>
+            <th>Fecha de Cierre</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tarea in Model)
+        {
+            if (tarea._completa == false)
+            {
+                <tr>
+                <td>@tarea._id</td>
+                <td>@tarea._descripcion</td>
+                <td>@tarea._fechaCierre.ToString("dd/MM/yyyy")</td>
+                    <td>
+                        
+                        @Html.ActionLink("Finalizar Tarea", "CompletarTarea", "Peon", new { _id = tarea._id })
+                    </td>
+                 </tr>
+            }
+        }
+    </tbody>
+</table>
+<p>@ViewBag.msg</p>
+}

@@ -1,0 +1,46 @@
+﻿@model ObligatorioMvc.ViewModels.PeonTareaView
+
+@if (Context.Session.GetString("TipoEmp") == "Peon")
+{
+    <div>
+        <p>
+            <i style="color:red" class="fa-solid fa-circle-xmark">No tienes el Rol necesario</i>
+        </p>
+    </div>
+}
+else if (Context.Session.GetString("TipoEmp") == null)
+{
+    <p>
+        <i style="color:red" class="fa-solid fa-circle-xmark">Debe iniciar sesion</i>
+    </p>
+}
+else{
+<h2>Asignar una nueva tarea</h2>
+
+<form id="formularioTarea" method="post">
+    <div>
+        <label for="peon">Peon:</label>
+        <select id="peon" name="email" required>
+            <option value="">Seleccione un peon...</option>
+            @foreach (var vac in Model.Peones)
+            {
+                <option>@vac._email </option>
+            }
+        </select>
+    </div>
+
+    <div>
+        <label for="tarea">Tarea:</label>
+        <select id="tarea" name="id" required>
+            <option value="">Seleccione una tarea...</option>
+            @foreach (var ani in Model.Tareas)
+            {
+                <option>@ani._id </option>
+            }
+        </select>
+    </div>
+    <a class="nav-link text-dark" asp-area="" asp-controller="Capataz" asp-action="CrearTarea">Crear nueva tarea</a>
+    <button type="submit">Asignar</button>
+    <p>@ViewBag.msg</p>
+</form>
+}

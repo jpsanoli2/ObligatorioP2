@@ -1,0 +1,50 @@
+﻿@model Dominio.Empleado
+
+
+
+<h1>Registro</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" action="/Empleado/Registrarse">
+
+            <div class="form-group">
+                <label class="control-label">Email: </label>
+                <input type="email" name="email" required/>
+            </div>
+            <br>
+            <div class="form-group">
+                <label class="control-label">Contraseña: </label>
+                <input type="password" name="contrasenia" required minlenght="8"/>
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label class="control-label">Nombre: </label>
+                <input type="text" name="nombre" required />
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label class="control-label">Fecha ingreso: </label>
+                <input type="date" name="fechaIngreso" required />
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label class="control-label">¿Es residente?: </label>
+                <select name="esResidente">
+                    <option value="si">Si</option>
+                    <option value="no">No</option>
+
+                </select>
+            </div>
+
+            <br>
+            <div class="form-group ">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<p>@ViewBag.msg</p>

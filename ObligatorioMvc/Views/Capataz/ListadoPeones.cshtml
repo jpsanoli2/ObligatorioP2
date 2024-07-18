@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Dominio.Peon>
+
+@if (Context.Session.GetString("TipoEmp") == "Peon")
+{
+    <div>
+        <p>
+            <i style="color:red" class="fa-solid fa-circle-xmark">No tienes el Rol necesario</i>
+        </p>
+    </div>
+}
+else if (Context.Session.GetString("TipoEmp") == null)
+{
+    <p>
+        <i style="color:red" class="fa-solid fa-circle-xmark">Debe iniciar sesion</i>
+    </p>
+}
+else{
+
+  <h2>Listado de peones con sus tareas:</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Contraseña</th>
+            <th>Nombre</th>
+            <th>Fecha de ingreso</th>
+            <th>Residente</th>
+            <th>Tareas asignadas</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item._email</td>
+                <td>@item._contrasenia</td>
+                <td>@item._nombre</td>
+                <td>@item._fechaIngreso</td>
+                <td>@item._residente</td>
+                @foreach (var t in item._tareasAsignadas)
+                {
+                    <td>@t.ToString()</td>
+                }
+  
+            </tr>
+        }
+    </tbody>
+</table>
+}

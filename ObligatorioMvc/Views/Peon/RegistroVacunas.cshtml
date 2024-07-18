@@ -1,0 +1,46 @@
+﻿@model ObligatorioMvc.ViewModels.RegistroVacunasView
+
+@if (Context.Session.GetString("TipoEmp") == "Capataz")
+{
+    <div>
+        <p>
+            <i style="color:red" class="fa-solid fa-circle-xmark">No tienes el Rol necesario</i>
+        </p>
+    </div>
+}
+else if (Context.Session.GetString("TipoEmp") == null)
+{
+    <p>
+        <i style="color:red" class="fa-solid fa-circle-xmark">Debe iniciar sesion</i>
+    </p>
+}
+else{
+    <h2>Registrar Nueva Vacunación</h2>
+
+<form id="formularioVacunacion" method="post">
+    <div>
+        <label for="vacuna">Vacuna:</label>
+        <select id="vacuna" name="vacuna" required>
+            @foreach (var vac in Model.Vacunas)
+            {
+                <option>@vac._nombre </option>
+            }
+
+
+        </select>
+    </div>
+
+    <div>
+        <label for="animal">Animal:</label>
+       <select id="animal" name="animal" required>
+           @foreach (var ani in Model.Animales)
+            {
+                <option>@ani._id </option>
+            }
+        </select>
+    </div>
+
+    <button type="submit">Registrar</button>
+    <p>@ViewBag.msg</p>
+</form>
+}

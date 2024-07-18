@@ -1,0 +1,47 @@
+﻿@model Dominio.Tarea
+@if (Context.Session.GetString("TipoEmp") == "Peon")
+{
+    <div>
+        <p>
+            <i style="color:red" class="fa-solid fa-circle-xmark">No tienes el Rol necesario</i>
+        </p>
+    </div>
+}
+else if (Context.Session.GetString("TipoEmp") == null)
+{
+    <p>
+        <i style="color:red" class="fa-solid fa-circle-xmark">Debe iniciar sesion</i>
+    </p>
+}
+else
+{
+    <h1>Crear tarea</h1>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post">
+
+                <div class="form-group">
+                    <label class="control-label">Descripcion:</label>
+                    <input type="text" name="descripcion" />
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Fecha Realizacion:</label>
+                    <input type="date" name="fechaRealizacion" />
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Fecha cierre:</label>
+                    <input type="date" name="fechaCierre" />
+                </div>
+
+                <br />
+                <div class="form-group ">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <p>@ViewBag.msg</p>
+}

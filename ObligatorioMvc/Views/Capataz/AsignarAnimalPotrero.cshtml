@@ -1,0 +1,47 @@
+﻿@model ObligatorioMvc.ViewModels.AnimalPotreroView
+
+@if (Context.Session.GetString("TipoEmp") == "Peon")
+{
+    <div>
+        <p>
+            <i style="color:red" class="fa-solid fa-circle-xmark">No tienes el Rol necesario</i>
+        </p>
+    </div>
+}
+else if (Context.Session.GetString("TipoEmp") == null)
+{
+    <p>
+        <i style="color:red" class="fa-solid fa-circle-xmark">Debe iniciar sesion</i>
+    </p>
+}
+else{
+<h2>Asignar Animal a Potrero</h2>
+
+<form method="post">
+    <div>
+        <label for="potrero">Potrero:</label>
+        <select id="potrero" name="potrero" required>
+            <option value="">Seleccione un potrero...</option>
+             
+            
+            @foreach (var p in Model.Potreros)
+            {
+                <option value="@p._id">@p._id </option>
+            }
+        </select>
+    </div>
+          
+    <div>
+        <label for="animal">Animal:</label>
+        <select id="animal" name="animal" required>
+            <option value="">Seleccione un animal...</option>
+            @foreach (var a in Model.Animales)
+            {
+                <option value="@a._id">@a._id </option>
+            }
+        </select>
+    </div>
+    <input type="submit" value="Asignar" class="btn btn-primary" />
+    <p>@ViewBag.msg</p>
+</form>
+}

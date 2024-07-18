@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Dominio.Animal>
+@if (Context.Session.GetString("TipoEmp") == "Peon")
+{
+    <div>
+        <p>
+            <i style="color:red" class="fa-solid fa-circle-xmark">No tienes el Rol necesario</i>
+        </p>
+    </div>
+}
+else if (Context.Session.GetString("TipoEmp") == null)
+{
+    <p>
+        <i style="color:red" class="fa-solid fa-circle-xmark">Debe iniciar sesion</i>
+    </p>
+}
+else{
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Tipo animal</th>
+            <th>Peso</th>
+            <th>Sexo</th>
+            <th>Ganancia individual</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item._id</td>
+                @if (item is Dominio.Ovino)
+                {
+                    <td>Ovino</td>
+                }
+                @if (item is Dominio.Bovino)
+                {
+                    <td>Bovino</td>
+                }
+
+                <td>@item._pesoActual</td>
+                <td>@item._sexo</td>
+                <td>@item.CalcularPrecio()</td>
+            </tr>
+        }
+     
+    </tbody>
+</table>
+<p>@ViewBag.msg</p>
+}

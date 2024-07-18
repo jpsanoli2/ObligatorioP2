@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Dominio.Potrero>
+@if (Context.Session.GetString("TipoEmp") == "Peon")
+{
+    <div>
+        <p>
+            <i style="color:red" class="fa-solid fa-circle-xmark">No tienes el Rol necesario</i>
+        </p>
+    </div>
+}
+else if (Context.Session.GetString("TipoEmp") == null)
+{
+    <p>
+        <i style="color:red" class="fa-solid fa-circle-xmark">Debe iniciar sesion</i>
+    </p>
+}
+else{
+
+<h2>Listado de potreros</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Descripcion</th>
+            <th>Cant animales</th>
+            <th>Precio venta</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item._id</td>
+                <td>@item._descripcion</td>
+                    @if(item._animalesAlli.Count() == 0)
+                    {
+                        <td>No hay animales</td>
+                    }
+                    else
+                    {
+                        <td>@item._animalesAlli.Count()</td>
+                    }
+                    
+                <td>@item.precioPotrero()</td>
+            </tr>
+        }
+    </tbody>
+</table>
+}

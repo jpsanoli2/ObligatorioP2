@@ -1,0 +1,26 @@
+﻿@model Dominio.Peon
+@if (Context.Session.GetString("TipoEmp") == "Capataz")
+{
+    <div>
+        <p>
+            <i style="color:red" class="fa-solid fa-circle-xmark">No tienes el Rol necesario</i>
+        </p>
+    </div>
+}
+else if (Context.Session.GetString("TipoEmp") == null)
+{
+    <p>
+        <i style="color:red" class="fa-solid fa-circle-xmark">Debe iniciar sesion</i>
+    </p>
+}
+else{
+<h1>Datos:</h1>
+
+<li><strong>Email: </strong> @Model._email</li>
+    <li><strong>Nombre: </strong> @Model._nombre</li>
+
+    <li><strong>Fecha Ingreso: </strong> @Model._fechaIngreso</li>
+<li><strong>Residente: </strong> @Model._residente</li>
+
+}
+

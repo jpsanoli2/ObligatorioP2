@@ -1,0 +1,82 @@
+﻿@model Dominio.Animal
+
+@if (Context.Session.GetString("TipoEmp") == "Peon")
+{
+    <div>
+        <p>
+            <i style="color:red" class="fa-solid fa-circle-xmark">No tienes el Rol necesario</i>
+        </p>
+    </div>
+}
+else if (Context.Session.GetString("TipoEmp") == null)
+{
+    <p>
+        <i style="color:red" class="fa-solid fa-circle-xmark">Debe iniciar sesion</i>
+    </p>
+}
+else
+{
+    <head>
+
+        <title>Registrar Nuevo Bovino</title>
+    </head>
+    <body>
+        <h2>Registrar Nuevo Bovino</h2>
+
+        <form action="/Capataz/RegistrarBovino" method="post">
+            <div>
+                <label for="id">ID:</label>
+                <input type="text" id="id" name="id" required>
+            </div>
+            <div>
+                <label for="sexo">Sexo:</label>
+                <select id="sexo" name="sexo" required>
+                    <option value="1">Macho</option>
+                    <option value="2">Hembra</option>
+                </select>
+            </div>
+            <div>
+                <label for="raza">Raza:</label>
+                <input type="text" id="raza" name="raza" required>
+            </div>
+            <div>
+                <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+                <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+            </div>
+            <div>
+                <label for="costoAdquisicion">Costo de Adquisición:</label>
+                <input type="number" id="costoAdquisicion" name="costoAdquisicion" step="0.01" required>
+            </div>
+            <div>
+                <label for="costoAlimentacion">Costo de Alimentación:</label>
+                <input type="number" id="costoAlimentacion" name="costoAlimentacion" step="0.01" required>
+            </div>
+            <div>
+                <label for="pesoActual">Peso Actual (kg):</label>
+                <input type="number" id="pesoActual" name="pesoActual" step="0.01" required>
+            </div>
+            <div>
+                <label for="hibrido">¿Es Híbrido?:</label>
+                <input type="checkbox" id="hibrido" name="hibrido">
+            </div>
+            <div>
+                <label for="tipoAlimentacion">Tipo de Alimentación:</label>
+                <select id="tipoAlimentacion" name="tipoAlimentacion" required>
+
+                    <option value="1">Grano</option>
+                    <option value="2">Pastura</option>
+                </select>
+
+
+
+            </div>
+            <div>
+                <label for="precioXKgBovino">Precio por Kg de Bovino:</label>
+                <input type="number" id="precioXKgBovino" name="precioXKgBovino" step="0.01" required>
+            </div>
+
+            <button type="submit">Registrar Bovino</button>
+        </form>
+        <p>@ViewBag.msg</p>
+    </body>
+}
